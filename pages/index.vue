@@ -1,65 +1,5 @@
 <template>
   <div>
-    <div>
-      <nuxt-link to="/">
-        <img class="brend_logo" src="@/assets/Лого.png"
-      /></nuxt-link>
-    </div>
-    <div class="navigation">
-      <ul class="navigation_bar">
-        <li class="navigation_bar_portfolio">
-          <nuxt-link to="bum">Портфолио</nuxt-link>
-        </li>
-
-        <li class="navigation_bar_price">
-          <nuxt-link to="price">Стоимость</nuxt-link>
-        </li>
-
-        <li class="navigation_bar_about">
-          <nuxt-link to="about">Обо мне</nuxt-link>
-        </li>
-
-        <li class="navigation_bar_contacts">
-          <nuxt-link to="contacts">Контакты</nuxt-link>
-        </li>
-
-        <v-card>
-          <li class="navigation_bar_icon">
-            <nav>
-              <transition name="fade" mode="out-in">
-                <i
-                  class="material-icons navigation_bar_icon_menu"
-                  v-if="!show"
-                  @click="show = !show"
-                  key="menu"
-                  >menu</i
-                >
-
-                <i
-                  class="material-icons navigation_bar_icon_clear"
-                  v-else
-                  @click="show = !show"
-                  key="clear"
-                  >clear</i
-                >
-              </transition>
-              <transition name="fade"
-                ><ul class="navigation_bar_icon_panel" v-if="show">
-                  <li
-                    class="navigation_bar_icon_panel_items"
-                    v-for="item in items"
-                    :key="item"
-                  >
-                    <a :href="item.path">{{ item.src }}</a>
-                  </li>
-                </ul></transition
-              >
-            </nav>
-          </li></v-card
-        >
-      </ul>
-    </div>
-    <div class="divide"></div>
     <div class="banner_carousel">
       <VueSlickCarousel
         :slidesToShow="1"
@@ -90,42 +30,44 @@
       </VueSlickCarousel>
     </div>
     <v-container class="welcome">
-      <v-row
-        ><v-col
+      <v-row>
+        <v-col
           ><p class="welcome_title">
             Мои фотографии запечатлевают те драгоценные моменты, которые
             запечатлевает сердце, ту атмосферу, которую сердце помнит спустя
             десятилетия...
           </p></v-col
-        ></v-row
-      >
-      <v-row
-        ><v-col cols="12" xl="4" lg="4" md="4" sm="4"
-          ><div>
-            <img class="welcome_image" src="@/assets/фото4.jpg" /></div></v-col
-        ><v-col cols="12" xl="7" lg="7" md="7" sm="7"
+        >
+      </v-row>
+      <v-row>
+        <v-col cols="12" xl="4" lg="4" md="4" sm="4">
+          <div>
+            <img class="welcome_image" src="@/assets/фото4.jpg" />
+          </div>
+        </v-col>
+        <v-col cols="12" xl="7" lg="7" md="7" sm="7"
           ><p class="welcome_text">
             Здравствуйте! Меня зовут Виктория Бронникова, я - профессиональный
             фотограф, уже 6 лет фотографирую для Вас
           </p></v-col
-        ></v-row
-      >
+        >
+      </v-row>
     </v-container>
     <div class="welcome_request">
-      <v-row
-        ><v-col
+      <v-row>
+        <v-col
           ><p class="welcome_title">
             Напишите мне, и мы воплотим ваши идеи в реальность
           </p></v-col
-        ></v-row
-      >
-      <v-row
-        ><v-col
+        >
+      </v-row>
+      <v-row>
+        <v-col
           ><p class="welcome_text_form">
             Заполните форму для записи, чтобы наша встреча состоялась
           </p></v-col
-        ></v-row
-      >
+        >
+      </v-row>
       <div class="welcome_form_input">
         <input class="text welcome_input" v-model="name" placeholder="Имя" />
       </div>
@@ -145,38 +87,6 @@
         </button>
       </div>
     </div>
-    <div class="footer">
-      <div class="footer_icon">
-        <nuxt-link to="#"
-          ><img class="icon" src="@/assets/телефон.png" alt=""
-        /></nuxt-link>
-
-        <nuxt-link to="#"
-          ><img class="icon" src="@/assets/вк.png" alt=""
-        /></nuxt-link>
-
-        <nuxt-link to="#"
-          ><img class="icon" src="@/assets/инст.png" alt=""
-        /></nuxt-link>
-      </div>
-
-      <div class="footer_sign">
-        <v-row
-          ><v-col
-            ><p class="footer_text">
-              Открыта к сотрудничеству и предложениям
-            </p></v-col
-          ></v-row
-        >
-        <v-row
-          ><v-col
-            ><p class="footer_text">
-              (с) Фотограф Бронникова Виктория. Нижний тагил
-            </p></v-col
-          ></v-row
-        >
-      </div>
-    </div>
   </div>
 </template>
 
@@ -185,35 +95,26 @@ import VueSlickCarousel from "vue-slick-carousel";
 import "vue-slick-carousel/dist/vue-slick-carousel.css";
 import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 
-
-
 export default {
-  name: "home",
   components: { VueSlickCarousel },
 
   data: () => ({
-    items: [
-      { src: "Портфолио", path: "/portfolio" },
-      { src: "Стоимость", path: "/price" },
-      { src: "Обо мне", path: "/about" },
-      { src: "Контакты", path: "/contacts" },
-    ],
-
-    show: false,
-
     name: "",
     mail: "",
     text: "",
-
-    methods: {},
+  }),
+  methods: {
     formpost() {
-      axios.post("/server/post", {
+      this.$axios.post("/server/post", {
         name: this.name,
         mail: this.mail,
         text: this.text,
       });
     },
-  }),
+  },
+  mounted() {
+    this.formpost();
+  },
 };
 </script>
 
@@ -228,16 +129,19 @@ export default {
   margin-left: auto;
   margin-right: auto;
 }
+
 .navigation {
   margin: 0;
   width: 100%;
 }
+
 .navigation_bar {
   list-style-type: none;
   overflow: hidden;
   background-color: white;
   text-align: center;
 }
+
 .navigation_bar_image_right {
   display: inline-block;
 }
@@ -309,9 +213,11 @@ export default {
   padding-left: 85px;
   padding-right: 60px;
 }
+
 .navigation_bar_image_left_branch1 {
   width: 40px;
 }
+
 .navigation_image_right_branch2 {
   width: 40px;
   transform: scale(-1, 1);
@@ -348,6 +254,7 @@ export default {
   font-size: 28px;
   text-align: center;
 }
+
 .welcome_image {
   display: block;
   margin: 0 auto;
@@ -355,11 +262,13 @@ export default {
 
   padding-left: 20px;
 }
+
 .welcome_text {
   font-family: Raleway;
   font-size: 24px;
   padding-left: 20px;
 }
+
 .welcome_text_form {
   font-family: Raleway;
   font-size: 24px;
@@ -370,9 +279,11 @@ export default {
   padding-top: 60px;
   background-color: #f5ecff;
 }
+
 .welcome_form_input {
   padding-top: 20px;
 }
+
 .welcome_input {
   height: 60px;
   display: block;
@@ -409,6 +320,7 @@ export default {
   padding-top: 40px;
   padding-bottom: 60px;
 }
+
 .welcome_form_button_send {
   display: block;
   margin-left: auto;
@@ -422,30 +334,6 @@ export default {
   padding: 10px;
 }
 
-.footer {
-  display: block;
-  padding-top: 60px;
-}
-
-.footer_icon {
-  display: block;
-  text-align: center;
-}
-
-.icon {
-  width: 80px;
-  padding: 10px;
-}
-
-.footer_text {
-  font-family: Raleway;
-  font-size: 24px;
-  text-align: center;
-}
-.footer_sign {
-  padding-top: 40px;
-  padding-bottom: 200px;
-}
 @media screen and (min-width: 950px) {
   .navigation_bar_icon {
     display: none;
@@ -472,6 +360,7 @@ export default {
   .navigation_bar_price {
     display: none;
   }
+
   .navigation_bar_about {
     display: none;
   }
@@ -483,6 +372,7 @@ export default {
   .navigation_bar_image_left_branch1 {
     display: none;
   }
+
   .navigation_bar_image_right_branch2 {
     display: none;
   }
@@ -490,6 +380,7 @@ export default {
   .navigation_bar_delimiter_dot {
     display: none;
   }
+
   .navigation_bar_icon {
     float: left;
     list-style-type: none;
@@ -522,6 +413,7 @@ export default {
   .navigation_bar_image_left_branch1 {
     display: none;
   }
+
   .navigation_bar_image_right_branch2 {
     display: none;
   }
@@ -555,5 +447,4 @@ export default {
   }
 }
 </style>
-
 

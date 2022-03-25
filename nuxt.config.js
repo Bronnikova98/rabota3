@@ -38,15 +38,14 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-
+    '@nuxtjs/axios',
     '@nuxt/http',
   ],
 
-  // При подключении перестает работать vuetify 
-  // serverMiddleware: {
-  //   '/api': '~/api',
-  // },
-
+  // При подключении перестает работать vuetify
+  serverMiddleware: {
+    '/api': '~/server/api.js',
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -71,11 +70,3 @@ export default {
   build: {
   }
 }
-
-// При подключении перестает работать vuetify 
-// module.exports = {
-//   serverMiddleware: ['~/server/api.js'],
-// }
-
-
-
